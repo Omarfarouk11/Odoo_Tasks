@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="tree_Order_model1" model="ir.ui.view">
+        <field name="name">create_order.tree</field>
+        <field name="model">create_order</field>
+        <field name="arch" type="xml">
+          <tree>
+
+                <field name="product_id"/>
+                <field name="Description"/>
+                <field name="Purchase_ids"/>
+                <field name="Quantity"/>
+
+                <field name="Cost_Price"/>
+                <field name="Total"/>
+
+          </tree>
+        </field>
+    </record>
+
+ <record id="view_Order_model1" model="ir.ui.view">
+        <field name="name">create_order.form</field>
+        <field name="model">create_order</field>
+        <field name="arch" type="xml">
+             <form>
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="Description"/>
+                        <field name="Purchase_ids"/>
+                        <field name="Quantity"/>
+<!--                        <field name="Requested_quantity"/>-->
+                        <field name="Cost_Price" readonly="True"/>
+                        <field name="Total"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="order_action1" model="ir.actions.act_window">
+            <field name="name">Create Order</field>
+            <field name="res_model">create_order</field>
+            <field name="view_mode">tree,form</field>
+  </record>
+
+     <menuitem id="menu_order_root1"
+            name="Create order"
+            parent="purchase.menu_procurement_management"
+            action="order_action1"
+       />
+</odoo>

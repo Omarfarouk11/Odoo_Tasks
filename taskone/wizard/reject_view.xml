@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+ <record id="view_reject_model1" model="ir.ui.view">
+        <field name="name">reject_wizard.form</field>
+        <field name="model">reject_wizard</field>
+        <field name="arch" type="xml">
+             <form>
+                <sheet>
+                    <group>
+                        <field name="Rejection"/>
+                    </group>
+                    <footer>
+                        <button string="Cancel" name="Cancel_Wizard" type="object" class="btn-danger"/>
+                        <button string="Confirm" name="Confirm_Wizard" type="object" class="btn-primary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+  <record model="ir.actions.act_window" id="action_go_to_wizard">
+	<field name="name">Reject Purchase</field>
+	<field name="res_model">reject_wizard</field>
+	<field name="view_mode">form</field>
+	<field name="target">new</field>
+
+   </record>
+</odoo>

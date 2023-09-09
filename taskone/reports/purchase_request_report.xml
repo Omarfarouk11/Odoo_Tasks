@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<template id="report_Purchase">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.external_layout">
+                <h3>Purchase Request</h3>
+                <div class="row d-flex m-4">
+                    <label class="mr-3">Request Name</label>
+                    <p><t t-esc="doc.requestname"/></p>
+                </div>
+                <div class="row d-flex m-4">
+                    <label class="mr-3">Username</label>
+                    <p><t t-esc="doc.requested_id.name"/></p>
+                </div>
+                <div class="row d-flex m-4">
+                    <label class="mr-3">Start Date</label>
+                    <p><t t-esc="doc.start_date"/></p>
+                </div>
+                <div class="row d-flex m-4">
+                    <label class="mr-3">End Date</label>
+                    <p><t t-esc="doc.end_date"/></p>
+                </div>
+                <div class="row d-flex m-4">
+                    <label t-if="doc.Rejection_reason != ''" class="mr-3">Rejection Reason</label>
+                      <t t-else="doc.Rejection_reason == ''" >
+                          <label></label>
+                       </t>
+                     <p ><t t-esc="doc.Rejection_reason"/></p>
+
+                </div>
+
+
+                <br/>
+                <br/>
+                <table id="table_purchase_request" string="Purchase_Request_table"
+                        columns="3" width="100%" height="200">
+                    <thead class="mb-3 bg-dark text-white" >
+                        <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th>Cost_Price</th>
+                        <th>Total</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="mt-10">
+                        <tr t-foreach="doc.order_id" t-as="line">
+                            <td><t t-esc="line.product_id.name"/></td>
+                            <td><t t-esc="line.Quantity"/></td>
+                            <td><t t-esc="line.Description"/></td>
+                            <td><t t-esc="line.Cost_Price"/></td>
+                            <td><t t-esc="line.Total"/></td>
+                        </tr>
+
+                    </tbody>
+                 </table>
+                <h2 class="text-right"><span>Total Price :</span><t t-esc="doc.Total_Price"/></h2>
+
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

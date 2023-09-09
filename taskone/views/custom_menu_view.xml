@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<record id="tree_Purchase_model" model="ir.ui.view">
+        <field name="name">purchase_request.tree</field>
+        <field name="model">purchase_requests</field>
+        <field name="arch" type="xml">
+           <tree>
+                <field name="requestname"/>
+                <field name="requested_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="order_id"/>
+                <field name="Total_Price"/>
+           </tree>
+        </field>
+    </record>
+    <record id="view1_Purchase_model" model="ir.ui.view">
+        <field name="name">purchase_requests.form</field>
+        <field name="model">purchase_requests</field>
+        <field name="arch" type="xml">
+             <form>
+
+                 <header>
+
+                            <button name="submit_for_approval" string="Submit for Approval" type="object" states="draft" class="oe_highlight"/>
+                            <button name="cancel" string="Cancel" type="object" states="draft" class="oe_link"/>
+                            <button name="approve" string="Approve" type="object" states="to_be_approved" class="oe_highlight"/>
+                            <button name="cancel" string="Cancel" type="object" states="to_be_approved" class="oe_link"/>
+                            <button name="resettodraft" string="Reset To Draft" type="object" states="cancel" class="oe_highlight"/>
+                            <button  name="%(action_go_to_wizard)d" string="Reject" type="action" states="to_be_approved" class="oe_link"/>
+                            <button  name="create_po" string="Create PO" type="object" states="approve" class="oe_link"/>
+                            <field name="state" widget="statusbar" nolabel="1"></field>
+
+                </header>
+                <sheet>
+                    <group>
+                        <field name="requestname"/>
+                        <field name="requested_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+
+
+                        <field name="Rejection_reason" attrs="{'invisible': [('state', '!=', 'reject')]}" readonly="True"/>
+                    </group>
+                    <notebook>
+                        <page string="OrderLines" name="orders">
+                                <field name="order_id">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="Description"/>
+                                        <field name="Purchase_ids"/>
+                                        <field name="Quantity"/>
+
+                                        <field name="Cost_Price"/>
+                                        <field name="Total"/>
+                                    </tree>
+                                </field>
+                        </page>
+                    </notebook>
+                      <footer>
+                          <group>
+                              <field name="Total_Price"/>
+                          </group>
+
+                 </footer>
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+    <record id="purchase_action" model="ir.actions.act_window">
+            <field name="name">Purchase Requests</field>
+            <field name="res_model">purchase_requests</field>
+            <field name="view_mode">tree,form</field>
+  </record>
+
+     <menuitem id="menu_purchase_root2"
+            name="Purchase requests"
+            parent="purchase.menu_procurement_management"
+            action="purchase_action"
+       />
+
+</odoo>
+

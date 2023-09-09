@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+            id="report_purchase_request"
+            string="Purchase Report"
+            model="purchase_requests"
+            report_type="qweb-pdf"
+            name="taskone.report_Purchase"
+            file="taskone.report_Purchase"
+    />
+</odoo>
